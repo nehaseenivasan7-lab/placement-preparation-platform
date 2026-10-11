@@ -1,0 +1,35 @@
+# Render.com Deployment Blueprint
+# Full-Stack Placement Preparation Ecosystem: Frontend, Backend & MongoDB Atlas
+services:
+  # 1. Backend Web Service
+  - type: web
+    name: nec-placement-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        value: mongodb+srv://admin:Placement2026@cluster0.mongodb.net/nec_placement?retryWrites=true&w=majority
+        sync: false
+    healthCheckPath: /api/health
+
+  # 2. Frontend Static Site
+  - type: web
+    name: nec-placement-portal
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    plan: free
+    envVars:
+      - key: VITE_API_URL
+        value: https://nec-placement-backend.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

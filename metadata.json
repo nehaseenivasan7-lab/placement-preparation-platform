@@ -1,0 +1,6 @@
+{
+  "name": "Placement Preparation Platform",
+  "description": "Comprehensive college placement preparation ecosystem for Junior, Pre-Final, Senior Mentors, and Admins at National Engineering College.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
